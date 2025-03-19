@@ -2863,11 +2863,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\brynn\\OneDrive - Brigham Young University\\ISJuniorCore\\IS413\\WaterProject\\backend\\WaterProject.API\\Bookstore.API.csproj",
+      "projectUniqueName": "C:\\Users\\brynn\\OneDrive - Brigham Young University\\ISJuniorCore\\IS413\\WaterProject\\backend\\Bookstore.API\\Bookstore.API.csproj",
       "projectName": "Bookstore.API",
-      "projectPath": "C:\\Users\\brynn\\OneDrive - Brigham Young University\\ISJuniorCore\\IS413\\WaterProject\\backend\\WaterProject.API\\Bookstore.API.csproj",
+      "projectPath": "C:\\Users\\brynn\\OneDrive - Brigham Young University\\ISJuniorCore\\IS413\\WaterProject\\backend\\Bookstore.API\\Bookstore.API.csproj",
       "packagesPath": "C:\\Users\\brynn\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\brynn\\OneDrive - Brigham Young University\\ISJuniorCore\\IS413\\WaterProject\\backend\\WaterProject.API\\obj\\",
+      "outputPath": "C:\\Users\\brynn\\OneDrive - Brigham Young University\\ISJuniorCore\\IS413\\WaterProject\\backend\\Bookstore.API\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

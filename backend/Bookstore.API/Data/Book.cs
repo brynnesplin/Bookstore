@@ -11,6 +11,8 @@ namespace Bookstore.API.Data
         [Required]
         public string Author { get; set; }
         [Required]
+        public string Publisher { get; set; }
+        [Required]
         public string Isbn { get; set; }
         [Required]
         public string Classification { get; set; }
