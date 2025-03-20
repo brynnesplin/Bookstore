@@ -17,6 +17,18 @@ namespace Bookstore.API.Controllers
         [HttpGet]
         public IActionResult GetBooks(int numPerPage = 3, int pageNum = 1, int sort = 0)
         {
+
+            string? favBookCat = Request.Cookies["FavoriteBookCategory"];
+            Console.WriteLine("-------COOKIE-------\n" + favBookCat);
+            HttpContext.Response.Cookies.Append("FavoriteBookCategory", "Classic", new CookieOptions
+            {
+                HttpOnly = true,
+                Secure = true,
+                SameSite = SameSiteMode.None,
+                Expires = DateTime.Now.AddMinutes(5)
+
+            });
+
             // store all books as query
             var query = _context.Books.AsQueryable();
 
