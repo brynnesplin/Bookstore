@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { Book } from "./types/Book";
+import { Book } from "../types/Book";
+import { useNavigate } from "react-router-dom";
 
 function Bookshelf({selectedCategories} : {selectedCategories:string[]}){
 
@@ -9,6 +10,8 @@ function Bookshelf({selectedCategories} : {selectedCategories:string[]}){
     const [numBooks, setNumBooks] = useState<number>(0);
     const [totalPages, setTotalPages] = useState<number>(0);
     const [sort, setSort] = useState<number>(0);
+
+    const navigate = useNavigate();
 
 
 // fetch data when the page loads or the number of records per page, page number, number of books, or sort changes
@@ -53,6 +56,7 @@ function Bookshelf({selectedCategories} : {selectedCategories:string[]}){
                     <td>ISBN</td>
                     <td>Page Count</td>
                     <td>Price</td>
+                    <td></td>
 
                 </tr>
             </thead>
@@ -68,6 +72,7 @@ function Bookshelf({selectedCategories} : {selectedCategories:string[]}){
                         <td>{b.isbn}</td>
                         <td>{b.pageCount}</td>
                         <td>${b.price.toFixed(2)}</td>
+                        <td><button className="btn btn-sm btn-secondary" onClick={() => navigate("addItem")}>Add to Cart</button></td>
                     </tr>
                 )}
             </tbody>
