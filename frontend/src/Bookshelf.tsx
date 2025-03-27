@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Book } from "./types/Book";
 
-function Bookshelf(){
+function Bookshelf({selectedCategories} : {selectedCategories:string[]}){
 
     const [bookshelf, setBookshelf] = useState<Book[]>([]);
     const [numPerPage, setNumPerPage] = useState<number>(3);
@@ -11,26 +11,27 @@ function Bookshelf(){
     const [sort, setSort] = useState<number>(0);
 
 
-
 // fetch data when the page loads or the number of records per page, page number, number of books, or sort changes
     useEffect(() => {
         const fetchBook = async() => {
-            const response = await fetch(`https://localhost:5000/api/Bookstore?numPerPage=${numPerPage}&pageNum=${pageNum}&sort=${sort}`);
+            const categoryParams = selectedCategories
+                .map((cat)=> `categories=${encodeURIComponent(cat)}`)
+                .join('&');
+            const response = await fetch(`https://localhost:5000/api/Bookstore?numPerPage=${numPerPage}&pageNum=${pageNum}&sort=${sort}${selectedCategories.length ? `&${categoryParams}` : ''}`);
             const data = await response.json();
             setBookshelf(data.books);
             setNumBooks(data.numBooks);
             setTotalPages(Math.ceil(numBooks/numPerPage))
 
+            console.log(categoryParams);
+
         }
 
     fetchBook();
-}, [numPerPage, pageNum, numBooks, sort]);
+}, [numPerPage, pageNum, numBooks, sort, selectedCategories]);
 
     return(
         <>
-        <h1>Our Bookshelf</h1>
-        <br></br>
-
         {/* table with books */}
         <table className="table table-hover  table-light table-striped">
             <thead className="h5">
