@@ -4,9 +4,12 @@ import "./CategoryFilter.css";
 function CategoryFilter({
   selectedCategories,
   setSelectedCategories,
+  setPageNum,
 }: {
   selectedCategories: string[];
   setSelectedCategories: (categories: string[]) => void;
+  pageNum: number;
+  setPageNum: (pageNum: number) => void;
 }) {
   const [categories, setCategories] = useState<string[]>([]);
 
@@ -35,6 +38,7 @@ function CategoryFilter({
       : [...selectedCategories, target.value];
 
     setSelectedCategories(updatedCategories);
+    setPageNum(1);
   }
   return (
     <div className="category-filter">

@@ -2,10 +2,17 @@ import { useEffect, useState } from "react";
 import { Book } from "../types/Book";
 import { useNavigate } from "react-router-dom";
 
-function Bookshelf({ selectedCategories }: { selectedCategories: string[] }) {
+function Bookshelf({
+  selectedCategories,
+  pageNum,
+  setPageNum,
+}: {
+  selectedCategories: string[];
+  pageNum: number;
+  setPageNum: (pageNum: number) => void;
+}) {
   const [bookshelf, setBookshelf] = useState<Book[]>([]);
   const [numPerPage, setNumPerPage] = useState<number>(3);
-  const [pageNum, setPageNum] = useState<number>(1);
   const [numBooks, setNumBooks] = useState<number>(0);
   const [totalPages, setTotalPages] = useState<number>(0);
   const [sort, setSort] = useState<number>(0);

@@ -6,6 +6,7 @@ import CartSummary from "../components/CartSummary";
 
 function BookshelfPage() {
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const [pageNum, setPageNum] = useState<number>(1);
 
   // display both the bookshelf and the category filters
   return (
@@ -18,10 +19,16 @@ function BookshelfPage() {
             <CategoryFilter
               selectedCategories={selectedCategories}
               setSelectedCategories={setSelectedCategories}
+              pageNum={pageNum}
+              setPageNum={setPageNum}
             />
           </div>
           <div className="col-md-10">
-            <Bookshelf selectedCategories={selectedCategories} />
+            <Bookshelf
+              selectedCategories={selectedCategories}
+              pageNum={pageNum}
+              setPageNum={setPageNum}
+            />
           </div>
         </div>
       </div>
