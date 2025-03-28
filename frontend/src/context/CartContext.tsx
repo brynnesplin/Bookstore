@@ -1,56 +1,64 @@
-
-
-import { createContext, ReactNode, useContext, useEffect, useState } from "react";
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import { CartItem } from "../types/CartItem";
 
-interface CartContextType{
-    cart: CartItem[];
-    addToCart: (item: CartItem) => void;
-    removeFromCart: (bookId: number) => void;
-    clearCart: () => void;
+interface CartContextType {
+  cart: CartItem[];
+  addToCart: (item: CartItem) => void;
+  removeFromCart: (bookId: number) => void;
+  clearCart: () => void;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
-export const CartProvider = ({children}: {children: ReactNode}) => {
-    const [cart, setCart] = useState<CartItem[]>([]);
+export const CartProvider = ({ children }: { children: ReactNode }) => {
+  const [cart, setCart] = useState<CartItem[]>([]);
 
-    const addToCart = (item: CartItem) => {
-        
-        setCart((prevCart) => {
-            const existingItem = prevCart.find((c) => c.bookId === item.bookId);
-            const updatedCart = prevCart.map((c) => 
-                c.bookId === item.bookId ? 
-            {...c, 
-                bookQuantity: c.bookQuantity + item.bookQuantity,
-            bookSub: (c.bookSub || 0) + (item.bookSub || 0)} : c);
-            
-            return existingItem ? updatedCart : [...prevCart, item];
-        });
-    };
+  // add the book or update the quantity of the book when added to the cart
+  const addToCart = (item: CartItem) => {
+    setCart((prevCart) => {
+      const existingItem = prevCart.find((c) => c.bookId === item.bookId);
+      const updatedCart = prevCart.map((c) =>
+        c.bookId === item.bookId
+          ? {
+              ...c,
+              bookQuantity: c.bookQuantity + item.bookQuantity,
+              bookSub: (c.bookSub || 0) + (item.bookSub || 0),
+            }
+          : c
+      );
 
-    const removeFromCart = (bookId: number) => {
-        setCart ((prevCart) => prevCart.filter((c) => c.bookId !== bookId))
+      return existingItem ? updatedCart : [...prevCart, item];
+    });
+  };
+  // remove book(s) from the cart
+  const removeFromCart = (bookId: number) => {
+    setCart((prevCart) => prevCart.filter((c) => c.bookId !== bookId));
+  };
 
-    };
+  // clear the cart
+  const clearCart = () => {
+    setCart(() => []);
+  };
 
-    const clearCart = () => {
-        setCart(() => []);
-    };
-
-    return(
-
-        <CartContext.Provider value={{cart, addToCart, removeFromCart, clearCart}}>
-        {children}
-        </CartContext.Provider>
-    );
-
+  return (
+    <CartContext.Provider
+      value={{ cart, addToCart, removeFromCart, clearCart }}
+    >
+      {children}
+    </CartContext.Provider>
+  );
 };
 
 export const useCart = () => {
-    const context = useContext(CartContext);
-    if (!context) {
-        throw new Error('useCart must be used within a CartProvider')
-    }
-    return context;
+  const context = useContext(CartContext);
+  if (!context) {
+    throw new Error("useCart must be used within a CartProvider");
+  }
+  return context;
 };
