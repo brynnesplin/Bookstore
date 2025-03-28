@@ -76,7 +76,7 @@ namespace Bookstore.API.Controllers
             return Ok(returnObj);
         }
 
-
+        // get all categories
         [HttpGet("Categories")]
         public IActionResult GetCategories()
         {

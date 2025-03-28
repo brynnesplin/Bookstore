@@ -1,33 +1,29 @@
-import { useState } from 'react'
-import './App.css'
-import Bookshelf from './Bookshelf'
-import CategoryFilter from './CategoryFilter'
-import Title from './Title'
+import "./App.css";
+import AddBookPage from "./pages/AddBookPage";
+import BookshelfPage from "./pages/BookshelfPage";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import CartPage from "./pages/CartPage";
+import { CartProvider } from "./context/CartContext";
 
 function App() {
-  const [selectedCategories, setSelectedCategories] = useState<string[]>([])
-
-
   return (
     <>
-    <div className='container'>
-      <div className='row'>
-        <Title/>
-      </div>
-      <div className='row'>
-       <div className='col-md-3'>
-        <CategoryFilter selectedCategories={selectedCategories} setSelectedCategories={setSelectedCategories}/>
-       </div>
-       <div className='col-md-9'>
-        <Bookshelf selectedCategories = {selectedCategories}/>
-       </div>
-        </div> 
-      
-    
-    </div>
-
+      <CartProvider>
+        {/* Routes for each page */}
+        <Router>
+          <Routes>
+            <Route path="/" element={<BookshelfPage />} />
+            <Route path="/bookshelf" element={<BookshelfPage />} />
+            <Route
+              path="/addItem/:bookTitle/:bookId/:bookPrice"
+              element={<AddBookPage />}
+            />
+            <Route path="/cart" element={<CartPage />} />
+          </Routes>
+        </Router>
+      </CartProvider>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
