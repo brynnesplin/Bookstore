@@ -63,7 +63,7 @@ function Bookshelf({selectedCategories} : {selectedCategories:string[]}){
             <tbody>
                 {/* data from api call for each book */}
                 {bookshelf.map((b)=>
-                    <tr>
+                    <tr key={b.bookId}>
                         <td>{b.title}</td>
                         <td>{b.author}</td>
                         <td>{b.publisher}</td>
@@ -72,7 +72,7 @@ function Bookshelf({selectedCategories} : {selectedCategories:string[]}){
                         <td>{b.isbn}</td>
                         <td>{b.pageCount}</td>
                         <td>${b.price.toFixed(2)}</td>
-                        <td><button className="btn btn-sm btn-secondary" onClick={() => navigate("addItem")}>Add to Cart</button></td>
+                        <td><button className="btn btn-sm btn-secondary" onClick={() => navigate(`/addItem/${b.title}/${b.bookId}/${b.price}`)}>Buy</button></td>
                     </tr>
                 )}
             </tbody>
@@ -83,18 +83,18 @@ function Bookshelf({selectedCategories} : {selectedCategories:string[]}){
 
         {/* previous page button */}
 
-        <button type="button" className="btn btn-sm btn-primary" disabled={pageNum === 1} onClick={() => setPageNum(pageNum-1)}>Previous</button>
+        <button type="button" className="btn btn-sm btn-primary" style={{margin:"20px"}}disabled={pageNum === 1} onClick={() => setPageNum(pageNum-1)}>Previous</button>
             
             
         {/* dynamically create a button for every page */}
         {[...Array(totalPages)].map((_,i) => (
-            <button  type="button" className="btn btn-sm btn-secondary"key={i + 1} disabled={pageNum === i + 1}onClick={() => setPageNum(i + 1)}>
+            <button  type="button" className="btn btn-sm btn-secondary" style={{margin:"10px"}} key={i + 1} disabled={pageNum === i + 1}onClick={() => setPageNum(i + 1)}>
                 {i + 1}
             </button>
         ))}
 
         {/* next page button */}
-        <button type="button" className="btn btn-sm btn-primary"disabled={pageNum === totalPages} onClick = {() => setPageNum(pageNum + 1)}>Next</button>
+        <button type="button" className="btn btn-sm btn-primary" style={{margin:"10px"}}disabled={pageNum === totalPages} onClick = {() => setPageNum(pageNum + 1)}>Next</button>
         
         {/*Allow users to choose how many records to show per page */}
         <div>

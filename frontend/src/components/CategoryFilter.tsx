@@ -38,12 +38,13 @@ function CategoryFilter({
     }
     return(
         <div className = "category-filter">
+            <h4>Categories</h4>
             <div className = "category-list">
                 {categories.map((c) => (
                     <div key={c} className = "category-item">
-                        <input type="checkbox" id={c} value={c} className = "category-checkbox"
+                        <input type="checkbox" id={c} value={c} className = "btn-check"
                         onChange={handleCheckboxChange}/>
-                        <label htmlFor={c}>{c}</label>
+                        <label className="btn btn-primary" style={{margin: '3pt', width: '120px'}} htmlFor={c}>{c}</label>
                     </div>  
             ))}
             </div>

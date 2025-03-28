@@ -68,11 +68,11 @@ button:focus-visible {
 }
 
 .btn-primary{
-  margin: 20pt;
+  margin-bottom: 10pt;
 }
 
 .btn-secondary {
-  margin: 10pt;
+  margin-bottom: 10pt;
 }
 
 .custom-thin-select {
