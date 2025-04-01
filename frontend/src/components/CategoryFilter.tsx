@@ -18,7 +18,7 @@ function CategoryFilter({
     const fetchCategories = async () => {
       try {
         const response = await fetch(
-          `https://localhost:5000/api/Bookstore/Categories?${selectedCategories}`
+          `https://bookstore-esplin-backend.azurewebsites.net/api/Bookstore/Categories?${selectedCategories}`
         );
         const data = await response.json();
         // set categories to equal the categories fetched from the database
