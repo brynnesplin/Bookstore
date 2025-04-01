@@ -1,0 +1,4 @@
+{
+  "appService.defaultWebAppToDeploy": "undefined/subscriptions/4225353d-7834-431f-8169-9b5b4bb5e845/resourceGroups/appsvc_windows_centralus/providers/Microsoft.Web/sites/Bookstore-Esplin-Backend",
+  "appService.deploySubpath": "backend\\Bookstore.API\\publish"
+}
