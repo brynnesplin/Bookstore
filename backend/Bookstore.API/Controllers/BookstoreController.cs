@@ -1,6 +1,7 @@
 ﻿using Bookstore.API.Data;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Query;
 
 namespace Bookstore.API.Controllers
 {
@@ -70,13 +71,13 @@ namespace Bookstore.API.Controllers
             var returnObj = new
             {
                 Books = books,
-                numBooks = numBooks
+                numBooks
 
             };
             return Ok(returnObj);
         }
 
-        // get all categories
+        // get all categories 
         [HttpGet("Categories")]
         public IActionResult GetCategories()
         {
@@ -85,6 +86,49 @@ namespace Bookstore.API.Controllers
                 .Distinct()
                 .ToList();
             return Ok(categories);
+        }
+
+        [HttpPost("Add")]
+        public IActionResult AddBook([FromBody] Book newBook){
+
+            _context.Books.Add(newBook);
+            _context.SaveChanges();
+            return Ok(newBook);
+
+        }
+
+        [HttpPut("UpdateBook/{bookId}")]
+        public IActionResult UpdateBook(int bookId, [FromBody] Book updatedBook)
+        {
+            var existingBook = _context.Books.Find(bookId);
+            existingBook.Title = updatedBook.Title;
+            existingBook.Author = updatedBook.Author;
+            existingBook.Publisher = updatedBook.Publisher;
+            existingBook.Category = updatedBook.Category;
+            existingBook.Classification = updatedBook.Classification;
+            existingBook.Isbn = updatedBook.Isbn;
+            existingBook.Price = updatedBook.Price;
+            _context.Update(existingBook);
+            _context.SaveChanges();
+
+
+            return Ok(existingBook);
+
+        }
+
+        [HttpDelete("DeleteBook/{bookId}")]
+        public IActionResult DeleteBook(int bookId)
+        {
+            var book = _context.Books.Find(bookId);
+
+            if(book == null)
+            {
+                return NotFound(new { message = "Book not found" });
+            }
+            _context.Books.Remove(book);
+            _context.SaveChanges();
+
+            return NoContent();
         }
 
     }
