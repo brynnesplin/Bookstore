@@ -5,7 +5,6 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import CartPage from "./pages/CartPage";
 import { CartProvider } from "./context/CartContext";
 import AdminBooksPage from "./pages/AdminBooksPage";
-import NewBookForm from "./components/NewBookForm";
 
 function App() {
   return (
