@@ -18,7 +18,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowFrontend",
         policy =>
         {
-            policy.WithOrigins("http://localhost:3000", "https://icy-bush-0053cf01e.6.azurestaticapps.net/")
+            policy.WithOrigins("http://localhost:3000", "https://icy-bush-0053cf01e.6.azurestaticapps.net")
             .AllowCredentials()
             .AllowAnyHeader()
             .AllowAnyMethod();
