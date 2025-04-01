@@ -4,6 +4,8 @@ import BookshelfPage from "./pages/BookshelfPage";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import CartPage from "./pages/CartPage";
 import { CartProvider } from "./context/CartContext";
+import AdminBooksPage from "./pages/AdminBooksPage";
+import NewBookForm from "./components/NewBookForm";
 
 function App() {
   return (
@@ -19,6 +21,7 @@ function App() {
               element={<AddBookPage />}
             />
             <Route path="/cart" element={<CartPage />} />
+            <Route path="/adminBooks" element={<AdminBooksPage />} />
           </Routes>
         </Router>
       </CartProvider>
